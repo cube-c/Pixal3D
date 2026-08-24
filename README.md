@@ -127,6 +127,32 @@ python app.py --low_vram
 # or via environment variable:
 LOW_VRAM=1 python app.py
 ```
+## 📦 Datasets
+
+Datasets live under `datasets/` and are **not tracked by git** (see `.gitignore`).
+This section records which ones have been fetched so they can be reproduced.
+
+| Dataset | Files | Size | Purpose |
+|---------|-------|------|---------|
+| [BOP / YCB-V](https://huggingface.co/datasets/bop-benchmark/ycbv) | `ycbv_base.zip` | 16 KB | Camera intrinsics (`camera_uw.json`, `camera_cmu.json`), BOP19 test target list |
+| [BOP / YCB-V](https://huggingface.co/datasets/bop-benchmark/ycbv) | `ycbv_test_bop19.zip` | 0.66 GB | Multi-object real-capture test scenes: RGB, depth, per-instance visible masks, 6D pose GT |
+
+Re-download with:
+
+```bash
+HF_HUB_DISABLE_XET=1 hf download bop-benchmark/ycbv ycbv_base.zip \
+  --repo-type dataset --local-dir datasets/ycbv
+HF_HUB_DISABLE_XET=1 hf download bop-benchmark/ycbv ycbv_test_bop19.zip \
+  --repo-type dataset --local-dir datasets/ycbv
+```
+
+> `HF_HUB_DISABLE_XET=1` is needed because the Xet transfer backend stalls on
+> this repo; it forces plain HTTP range downloads instead.
+
+> **Note**: a top-level `datasets/` directory shadows the HuggingFace `datasets`
+> library for code run from the repo root. That library is not currently a
+> dependency, but keep it in mind if it is ever added.
+
 ## 🔧 Training
 
 We provide the full training codebase for reproducing Pixal3D from scratch.

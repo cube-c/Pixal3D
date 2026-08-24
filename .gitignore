@@ -24,3 +24,9 @@ env/
 Thumbs.db
 
 tmp
+
+# Generated 3D outputs
+outputs/
+
+# Downloaded datasets (see README "Datasets" section for what to fetch)
+datasets/
